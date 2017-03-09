@@ -1,18 +1,34 @@
 package com.app;
 
+import com.app.web.servlet.MyServlet1;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@ServletComponentScan  // 这个就是扫描相应的Servlet包，结合注解注册serlvet使用
 public class Demo2WebApplication extends SpringBootServletInitializer {
+	public static void main(String[] args) {
+		SpringApplication.run(Demo2WebApplication.class, args);
+	}
+
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return super.configure(builder);
 	}
 
-	public static void main(String[] args) {
-		SpringApplication.run(Demo2WebApplication.class, args);
+
+	/**
+	 * 注册Servlet.不需要添加注解：@ServletComponentScan
+	 * @return
+	 */
+	@Bean
+	public ServletRegistrationBean MyServlet1(){
+		return new ServletRegistrationBean(new MyServlet1(),"/myServlet/*");
 	}
 }
