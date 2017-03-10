@@ -1,0 +1,10 @@
+（32）Spring Boot使用@SpringBootApplication注解，从零开始学Spring Boot
+博客分类：
+从零开始学Spring Boot
+Spring Boot使用@SpringBootApplication注解从零开始学Spring Boot 
+
+       如果看了我之前的文章，这个节你就可以忽略了，这个是针对一些刚入门的选手存在的困惑进行写的一篇文章。
+很多Spring Boot开发者总是使用 @Configuration ， @EnableAutoConfiguration 和 @ComponentScan 注解他们的main类。
+由于这些注解被如此频繁地一块使用（特别是你遵循以上最佳实践时），Spring Boot提供一个方便的 @SpringBootApplication
+选择。该 @SpringBootApplication 注解等价于以默认属性使用 @Configuration ， @EnableAutoConfiguration 和 @ComponentScan 。
+这是官方进行解析的，我个人自己第一次接触的时候也是有这个困惑的，希望此篇文章能解答在研究Spring Boot困惑的人。
