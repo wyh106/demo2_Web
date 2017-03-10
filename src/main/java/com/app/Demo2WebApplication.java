@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ServletComponentScan  // 这个就是扫描相应的Servlet包，结合注解注册serlvet使用
 @EnableConfigurationProperties({WiselySettings.class,Wisely2Settings.class})
 //可以使用：basePackageClasses={},basePackages={}
-@ComponentScan(basePackages={"com.test","org.kfit"})
+@ComponentScan(basePackages={"com.test","com.app"})
 public class Demo2WebApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(Demo2WebApplication.class, args);
