@@ -11,21 +11,22 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ServletComponentScan  // 这个就是扫描相应的Servlet包，结合注解注册serlvet使用
 @EnableConfigurationProperties({WiselySettings.class,Wisely2Settings.class})
+//可以使用：basePackageClasses={},basePackages={}
+@ComponentScan(basePackages={"com.test","org.kfit"})
 public class Demo2WebApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(Demo2WebApplication.class, args);
 	}
 
-
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return super.configure(builder);
 	}
-
 
 	/**
 	 * 注册Servlet.不需要添加注解：@ServletComponentScan
