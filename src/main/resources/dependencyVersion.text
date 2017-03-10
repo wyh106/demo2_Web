@@ -1,0 +1,72 @@
+
+（30）导入时如何定制spring-boot依赖项的版本【转载】【从零开始学Spring Boot】
+    博客分类： 从零开始学Spring Boot
+导入时如何定制spring-boot依赖项的版本【转载】
+此文章转载地址：http://www.tuicool.com/articles/RJJvMj3 请注重作者的版权。
+spring-boot通过maven的依赖管理为我们写好了很多依赖项及其版本，我们可拿来使用。spring-boot文档介绍了两种使用方法，一是继承，二是导入。
+通过<parent>继承：
+<project>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.1.9.RELEASE</version>
+  </parent>
+</project>
+或者在<dependencyManagement>中导入：
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-dependencies</artifactId>
+      <version>1.1.9.RELEASE</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+    </dependencies>
+</dependencyManagement>
+此外，在其 文档 里说到，继承时可简单地通过属性定制依赖项版本。比如，改为使用较新的spring-4.1.6.RELEASE版本：
+<properties>
+    <spring.version>4.1.6.RELEASE<spring.version>
+</properties>
+
+不过，此法只对继承有效，导入无效。以下摘自其文档说明：
+This only works if your Maven project inherits (directly or indirectly) from spring-boot-dependencies.
+If you have added spring-boot-dependencies in your own dependencyManagement section with <scope>import</scope> you have to redefine the artifact yourself instead of overriding the property.
+导入时有没有较简单的方法呢？我们可先继承后导入！
+1、先建一个过渡性工程，继承后定制依赖项的版本。
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-dependencies</artifactId>
+    <version>1.1.9.RELEASE</version>
+  </parent>
+  <groupId>mycomp</groupId>
+  <artifactId>myproject-spring-boot-bom</artifactId>
+  <version>1.1.9</version>
+  <packaging>pom</packaging>
+  <properties>
+    <spring.version>4.1.6.RELEASE</spring.version>
+  </properties>
+</project>
+
+
+2、然后导入到自己的工程里。
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>mycomp</groupId>
+  <artifactId>myproject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>mycomp</groupId>
+        <artifactId>myproject-spring-boot-bom</artifactId>
+        <version>1.1.9</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
+这样，虽然多建了一个过渡性工程，但定制依赖项版本同继承时一样简单。
