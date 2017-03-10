@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by lenovo on 2017/3/10.
  */
-@Configuration
-// @ConditionalOnClass(Mongo.class)
-@EnableConfigurationProperties(MongoProperties.class)
+/*@Configuration
+@ConditionalOnClass(Mongo.class)
+@EnableConfigurationProperties(MongoProperties.class)*/
 public class MongoAutoConfiguration {
-    @Autowired
+   /* @Autowired
     private MongoProperties properties;
-
+*/
 }
